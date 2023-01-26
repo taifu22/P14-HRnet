@@ -1,0 +1,83 @@
+.div-employeeList {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: small;
+    min-height:90vh;
+    background-color: #007bff;
+    .div-table {
+        display: flex;
+        justify-content: center;
+        .responsive-table {
+            table-layout: fixed;
+            width: 90%;
+            border-collapse: collapse;
+            border-top: 3px solid #007bff;
+            border-bottom: 3px solid #007bff;
+            th, td{
+                padding: 5px;
+
+            }
+            thead {
+                height: 40px;
+                background-color: white;
+                color: #007bff;
+            }
+            tbody {
+                tr:nth-child(odd) {
+                    background-color: #d5e2f7;
+                    height: 45px;
+                }
+                tr:nth-child(even) {
+                    background-color: white;
+                    height: 45px;
+                }
+            }
+        }
+    } 
+    .div-pagination {
+        width: 90%;
+        margin-top: 15px;
+        display: flex;
+        justify-content: end;
+    }
+    .div-search {
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        .div-select {
+            display: flex;
+            select {
+                height: 25px;
+                margin-left: 5px;
+                margin-right: 5px;
+                border-radius: 5px;
+                border: 2px solid rgb(202, 198, 198);
+            }
+        }
+        .input-search {
+            margin-left: 10px;
+            border-radius: 5px;
+            border: 2px solid rgb(202, 198, 198);
+            &:focus {
+                outline: none;
+                border: solid 2px #83aef3;
+            }
+        }
+    }
+    .p-go-home {
+        color: white;
+    }
+}
+
+@media screen and (max-width: 1050px){
+    .div-employeeList {
+        .div-table {
+            // max-width: 1000px;
+            // overflow-x: scroll;
+        }
+    }
+}
