@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from '../validationSchema/ValidationSchema';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { setNewEmployee } from '../state/user.slice';
-import { useDispatch } from 'react-redux';
+import { setNewEmployee, setPageIndex } from '../state/user.slice';
+import { useDispatch, useSelector } from 'react-redux';
 import InputText from './FormInputs/InputText';
 import { states } from '../data/states.selectInput';
 import { departement } from '../data/departement.selectInput';
 import SelectInput from './FormInputs/SelectInput';
 import modal from './Modal';
 import ModalSuccess from './ModalSuccess';
+import EmployeeList from './EmployeeList';
 
 function FormSignin(props) { 
 
@@ -22,6 +22,10 @@ function FormSignin(props) {
     const todayDate =  new Date(Date.now()).setFullYear(new Date(Date.now()).getFullYear())
     const [DateBirth, setDateBirth] = useState(datebirth);
     const [startDate, setStartDate] = useState(todayDate);
+    const [ start, setStart ] = useState(false);
+    function startGo() {
+        setStart(!start);
+    }
 
     //set value for the inscription's modal
     const {isShowing: isInfoShowed, toggle: toggleInfo} = modal()
@@ -45,19 +49,21 @@ function FormSignin(props) {
         //i dispatch the recovered data to the redux store
         dispatch(setNewEmployee(dataEmployee));
         toggleInfo();
-	};
+	}; 
 
-    useEffect(()=>{
-        // console.log(datebirth);
-        // console.log(typeof datebirth);
-        // console.log(DateBirth);
-        // console.log(typeof DateBirth);
-        //console.log(states);
-    },[]) 
+    const dataEmployees = useSelector(state => ({...state.user}));
+
+    //here we dispatch to store the pageindex where we are in pagination with the EmployeeList Component
+	const updatePagePagination = (event, index) => {
+		event.preventDefault()
+		dispatch(setPageIndex(index))
+	}
 
     return (
-        <div className='container-fluid bg-primary'>
-            <Link to='/employeeList'><p className='p-view text-center text-light p-3'>View Current Employees</p></Link>
+        <>
+        {start == false ? 
+            <div className='container-fluid bg-primary'>
+                <p onClick={() => startGo()} role='button' className='p-view text-center text-light p-3'>View Current Employees</p>
             <br/>
             <div className="card mx-auto" style={{maxWidth:'620px'}} >
                 <article className="card-body">
@@ -126,7 +132,16 @@ function FormSignin(props) {
                 </article>
             </div>
             { isInfoShowed && <ModalSuccess hide={ toggleInfo }/> }
-        </div>
+        </div> : <EmployeeList 
+                    updatePage={updatePagePagination} 
+                    dataEmployees={dataEmployees} 
+                    valueSelect1={5} 
+                    valueSelect2={10} 
+                    valueSelect3={15} 
+                    changePage={startGo} 
+                />
+            }
+        </>
     );
 }
 

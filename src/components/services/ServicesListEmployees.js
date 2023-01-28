@@ -11,6 +11,10 @@ export const returnProductsArrays = (items, number) => {
     } 
     const array = items.slice(i)
     TwoDimensionalArray.push(array)
-    return TwoDimensionalArray 
+    //if the last array empty we will delete it
+    if (TwoDimensionalArray[TwoDimensionalArray.length - 1].length === 0) {
+      TwoDimensionalArray.pop();
+    }
+    return TwoDimensionalArray  
  };
  

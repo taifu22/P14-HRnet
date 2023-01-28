@@ -14,11 +14,11 @@ function Inputsearch(props) {
     let newArrayData2 = [];
 
     useEffect(()=>{
+        /*on commence par une condtion qui nous mene vers la page 1 de notre système de pagination
+        car si jamais on est sur aune autre page la recherche ne fonctionnera pas*/
         if (props.data.pageIndex > 0) {
-            console.log('pageindex');
             dispatch(setPageIndex(0));
         }
-        console.log(props.data.pageIndex);
         /*a chaque ecoute de onChange on videra les 2 tableaux pour ne pas avoir des doublons*/ 
         newArrayData = [];
         newArrayData2 = [];
