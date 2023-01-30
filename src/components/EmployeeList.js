@@ -33,7 +33,11 @@ function EmployeeList(props) {
                     <p>entries</p>
                 </div>
                 <p onClick={()=> props.changePage()} className='p-go-home' role={'button'}><b>Go To Home</b></p>
-                <Inputsearch data={props.dataEmployees} />
+                <Inputsearch 
+                    updatePage={props.updatePage} 
+                    data={props.dataEmployees} 
+                    dataEmployeesFiltered={props.dataEmployeesFiltered}    
+                />
             </div>
             <div className='div-table'>
                 <table className='responsive-table'>

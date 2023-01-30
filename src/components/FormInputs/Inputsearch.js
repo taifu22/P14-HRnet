@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setFilteredEmployees, setPageIndex } from '../../state/user.slice';
 
 function Inputsearch(props) {
 
     //on créé un state où l'on stockera 2 index avec les 2 recherches par exemple nom et prénom ou l'inverse
     const [stateInput, setStateInput] = useState([]);
-    const dispatch = useDispatch();
     /*dans le premier tableau on stockera le resultat de recherche avec le premier index du stateInput
     puis dans le deuxieme tableau on stockera le resultat du deuxieme index avec une recherche effectué sur les
     elements du newArrayData (premier tableau)*/
@@ -14,11 +11,6 @@ function Inputsearch(props) {
     let newArrayData2 = [];
 
     useEffect(()=>{
-        /*on commence par une condtion qui nous mene vers la page 1 de notre système de pagination
-        car si jamais on est sur aune autre page la recherche ne fonctionnera pas*/
-        if (props.data.pageIndex > 0) {
-            dispatch(setPageIndex(0));
-        }
         /*a chaque ecoute de onChange on videra les 2 tableaux pour ne pas avoir des doublons*/ 
         newArrayData = [];
         newArrayData2 = [];
@@ -61,13 +53,18 @@ function Inputsearch(props) {
         de la premiere recherche (affichage dynamique)
         Sinon si on a une deuxieme recherche on stockera dans le store le resultat de la deuxieme recherche*/
         if (newArrayData2.length === 0 || stateInput[1] == ' ') {
-            dispatch(setFilteredEmployees(newArrayData))
+            props.dataEmployeesFiltered(newArrayData)
         } else {
-            dispatch(setFilteredEmployees(newArrayData2))
+            props.dataEmployeesFiltered(newArrayData2)
         } 
     },[stateInput])
 
-    function Changeinput(e) {
+    function Changeinput(e, event) {
+        /*on commence par une condtion qui nous mene vers la page 1 de notre système de pagination
+        car si jamais on est sur aune autre page la recherche ne fonctionnera pas*/
+        if (props.data.pageIndex > 0) {
+            props.updatePage(event, 0)
+        }
         /*si on a un espace on split la deuxieme recherche (ou troisieme etc), vers un tableau pour avoir 
         pour chaque recherche uin index de notre tableau stateInput*/
         setStateInput(e.split(' '))
@@ -76,7 +73,7 @@ function Inputsearch(props) {
     return (
         <div>
             <label>Search : </label>
-            <input onChange={e => Changeinput(e.target.value)} className='input-search' type={"search"}/>
+            <input onChange={e => Changeinput(e.target.value, e)} className='input-search' type={"search"}/>
         </div>
     );
 }

@@ -5,7 +5,7 @@ import { validationSchema } from '../validationSchema/ValidationSchema';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { setNewEmployee, setPageIndex } from '../state/user.slice';
+import { setNewEmployee, setPageIndex, setFilteredEmployees } from '../state/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import InputText from './FormInputs/InputText';
 import { states } from '../data/states.selectInput';
@@ -15,7 +15,7 @@ import modal from './Modal';
 import ModalSuccess from './ModalSuccess';
 import EmployeeList from './EmployeeList';
 
-function FormSignin(props) { 
+function FormSignin() {  
 
     //variables for store the currentdata for the input startDate, and current data -18 for dateOfBirth input
     const datebirth =  new Date(Date.now()).setFullYear(new Date(Date.now()).getFullYear() - 18)
@@ -58,6 +58,12 @@ function FormSignin(props) {
 		event.preventDefault()
 		dispatch(setPageIndex(index))
 	}
+
+    //here we dispatch the data filtered of employees list in the store
+    //we need this function for the table component of employees list
+    const dataFiltered = (data) => {
+        dispatch(setFilteredEmployees(data))
+    }
 
     return (
         <>
@@ -135,6 +141,7 @@ function FormSignin(props) {
         </div> : <EmployeeList 
                     updatePage={updatePagePagination} 
                     dataEmployees={dataEmployees} 
+                    dataEmployeesFiltered={dataFiltered}
                     valueSelect1={5} 
                     valueSelect2={10} 
                     valueSelect3={15} 
