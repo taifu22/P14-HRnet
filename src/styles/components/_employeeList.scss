@@ -1,12 +1,8 @@
-.div-employeeList {
-    padding-top: 20px;
+@mixin tabledefault {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: small;
-    min-height:90vh;
-    background-color: #007bff;
     .div-table {
         display: flex;
         justify-content: center;
@@ -14,24 +10,24 @@
             table-layout: fixed;
             width: 90%;
             border-collapse: collapse;
-            border-top: 3px solid #007bff;
-            border-bottom: 3px solid #007bff;
+            .p-empty-list {
+                margin-top: 20px;
+                font-size: large;
+                width: 200px;
+                font-weight: bold;
+            }
             th, td{
                 padding: 5px;
 
             }
             thead {
                 height: 40px;
-                background-color: white;
-                color: #007bff;
             }
             tbody {
                 tr:nth-child(odd) {
-                    background-color: #d5e2f7;
                     height: 45px;
                 }
                 tr:nth-child(even) {
-                    background-color: white;
                     height: 45px;
                 }
             }
@@ -44,7 +40,6 @@
         justify-content: end;
     }
     .div-search {
-        color: white;
         display: flex;
         justify-content: space-between;
         width: 90%;
@@ -55,15 +50,52 @@
                 margin-left: 5px;
                 margin-right: 5px;
                 border-radius: 5px;
-                border: 2px solid rgb(202, 198, 198);
             }
         }
         .input-search {
             margin-left: 10px;
             border-radius: 5px;
-            border: 2px solid rgb(202, 198, 198);
             &:focus {
                 outline: none;
+            }
+        }
+    }
+}
+
+.div-employeeList-white {
+    @include tabledefault;
+    .responsive-table{
+        border-top: 3px solid #007bff;
+        border-bottom: 3px solid #007bff;
+        .p-empty-list {
+            color: white;
+        }
+        thead {
+            background-color: white;
+            color: #007bff;
+        }
+        tbody {
+            tr:nth-child(odd) {
+                background-color: #d5e2f7;
+            }
+            tr:nth-child(even) {
+                background-color: white;
+            }
+        }
+    }
+    .div-search {
+        color: white;
+        .div-select {
+            select {
+                border: 2px solid rgb(202, 198, 198);
+                &:focus {
+                    border: solid 2px #83aef3;
+                }
+            }
+        }
+        .input-search {
+            border: 2px solid rgb(202, 198, 198);
+            &:focus {
                 border: solid 2px #83aef3;
             }
         }
@@ -73,11 +105,90 @@
     }
 }
 
-@media screen and (max-width: 1050px){
-    .div-employeeList {
-        .div-table {
-            // max-width: 1000px;
-            // overflow-x: scroll;
+.div-employeeList-dark {
+    @include tabledefault;
+    .responsive-table{
+        border-top: 3px solid black;
+        border-bottom: 3px solid black;
+        .p-empty-list {
+            color: black;
         }
+        thead {
+            background-color: black;
+            color: white;
+        }
+        tbody {
+            tr:nth-child(odd) {
+                background-color: white;
+            }
+            tr:nth-child(even) {
+                color: white;
+                background-color: #727374;
+            }
+        }
+    }
+    .div-search {
+        color: black;
+        .div-select {
+            select {
+                border: 2px solid rgb(133, 127, 127);
+                &:focus {
+                    border: solid 2px #505253;
+                }
+            }
+        }
+        .input-search {
+            border: 2px solid rgb(133, 127, 127);
+            &:focus {
+                border: solid 2px #505253;
+            }
+        }
+    }
+    .p-go-home {
+        color: black;
+    }
+}
+
+.div-employeeList-danger {
+    @include tabledefault;
+    .responsive-table{
+        border-top: 3px solid red;
+        border-bottom: 3px solid red;
+        .p-empty-list {
+            color: red;
+        }
+        thead {
+            background-color: red;
+            color: white;
+        }
+        tbody {
+            tr:nth-child(odd) {
+                background-color: white;
+            }
+            tr:nth-child(even) {
+                color: white;
+                background-color: #d88181;
+            }
+        }
+    }
+    .div-search {
+        color: red;
+        .div-select {
+            select {
+                border: 2px solid #d88181;
+                &:focus {
+                    border: solid 2px red;
+                }
+            }
+        }
+        .input-search {
+            border: 2px solid #d88181;
+            &:focus {
+                border: solid 2px red;
+            }
+        }
+    }
+    .p-go-home {
+        color: red;
     }
 }

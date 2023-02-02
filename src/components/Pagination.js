@@ -19,24 +19,35 @@ const Pagination = (props) => {
 		return { isDisabled: props.pageIndex === 0 }
 	}, [props.pageIndex])
 	const Next = React.useMemo(() => {  
-		return { isDisabled: props.pageIndex === newData.length - 1  }
-	}, [props.pageIndex])
+		return { isDisabled: props.pageIndex === newData.length - 1 } 
+	}, [props.pageIndex, newData])
+
+	//function to choose theme css
+	function Themecss() {
+		if (props.cssThemes == 'theme2') {
+			return 'nav-pagination-dark'
+		} else if (props.cssThemes == 'theme3') {
+			return 'nav-pagination-danger'
+		} else {
+			return 'nav-pagination-white' 
+		}
+	}
 		 
     return ( 
 		!!newData.length &&
-		<nav aria-label="Page navigation example" >
-			<ul className="pagination">
-				<li className={`page-item ${ Previous.isDisabled ? 'disabled' : ''}`}>
-				    <a className="page-link" href="#" onClick={(e) => props.updatePage(e, props.pageIndex - 1)}>Previous</a>
+		<nav className={Themecss()} aria-label="Page navigation example">
+			<ul className="ul-pagination">
+				<li className={`${ Previous.isDisabled ? 'disabled-li' : ''}`}>
+				    <a onClick={(e) => props.updatePage(e, props.pageIndex - 1)}>Previous</a>
 				</li>
 					{newData.map((_, index) => {
-					    return (<li key={index} className="page-item">
-						            <a className="page-link" onClick={(e) => props.updatePage(e, index)}>{ index + 1 }</a>
+					    return (<li key={index} className={props.pageIndex == index ? "active-li" : ""}>
+						            <a onClick={(e) => props.updatePage(e, index)}>{ index + 1 }</a>
 								</li>
 								)}
 					)}						
-				<li className={`page-item ${ Next.isDisabled ? 'disabled' : ''}`}>
-				    <a className="page-link" href="#" onClick={(e) => props.updatePage(e, props.pageIndex + 1)}>Next</a>
+				<li className={`${ Next.isDisabled ? 'disabled-li' : ''}`}>
+				    <a onClick={(e) => props.updatePage(e, props.pageIndex + 1)}>Next</a>
 				</li>
 			</ul>
 		</nav>)

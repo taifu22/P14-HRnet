@@ -12,16 +12,43 @@ function EmployeeList(props) {
     let newdataEmployees;
 
     //condition for return either filteredusers (if you have search with input), or the complete list of users
-    if (props.dataEmployees.filteredusers.length > 0) {
+    if (props.dataEmployeeFiltered.length > 0) {
         //here we return a newdata users with the pagination with 9, or 10 or 15 line (employee), if the input search is active
-        newdataEmployees = returnProductsArrays(props.dataEmployees.filteredusers, stateValuePage); 
+        newdataEmployees = returnProductsArrays(props.dataEmployeeFiltered, stateValuePage); 
     } else {
         //if the user search input is not active we return the complete list of users with pagination
-        newdataEmployees = returnProductsArrays(props.dataEmployees.users, stateValuePage); 
+        newdataEmployees = returnProductsArrays(props.dataEmployees, stateValuePage); 
+    }
+
+    //function to iterate on the object containing the values of each employee
+    function forEmployee(item, index) {
+        const array = []
+        for(let item1 of Object.getOwnPropertyNames(item)) {
+            const item2 = item[item1]
+            array.push(item2)
+        }
+        return (
+            <tr key={'tr'+index}>
+                {array.map(data => {
+                    return (<td key={'td'+index+data}>{data}</td>)
+                })}
+            </tr>
+        )
+    }
+
+    //function to choose theme css
+    function Themecss() {
+        if (props.cssThemes == 'theme2') {
+            return 'div-employeeList-dark'
+        } else if (props.cssThemes == 'theme3') {
+            return 'div-employeeList-danger'
+        } else {
+            return 'div-employeeList-white'
+        }
     }
 
     return (
-        <div className='div-employeeList'>
+        <div className={Themecss()}>
             <div className='div-search'>
                 <div className='div-select'>
                     <p>Show </p>
@@ -32,56 +59,41 @@ function EmployeeList(props) {
                     </select>
                     <p>entries</p>
                 </div>
-                <p onClick={()=> props.changePage()} className='p-go-home' role={'button'}><b>Go To Home</b></p>
+                <p onClick={()=> props.changePage()} className='p-go-home' role={'button'}><b>{props.pBack}</b></p>
                 <Inputsearch 
                     updatePage={props.updatePage} 
                     data={props.dataEmployees} 
-                    dataEmployeesFiltered={props.dataEmployeesFiltered}    
+                    dataEmployeesFiltered={props.setDataEmployeesFiltered}    
                 />
             </div>
             <div className='div-table'>
                 <table className='responsive-table'>
                     <thead>
                         <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Start Date</th>
-                            <th>Departement</th>
-                            <th>Date of Birth</th>
-                            <th>Street</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Zip Code</th>
+                            {props.arrayValuesTh.map((item, index) => {
+                                return(
+                                    <th key={'th'+index}>{item}</th>
+                                )
+                            })}
                         </tr>
                     </thead>
                     <tbody>
                         { 
-                            newdataEmployees[0].length  ? newdataEmployees[props.dataEmployees.pageIndex].map((item, index) => {
-                                return (
-                                    <tr key={'key'+index}>
-                                        <td>{item.firstname}</td>
-                                        <td>{item.lastname}</td>
-                                        <td>{item.dateOfStart}</td>
-                                        <td>{item.departement}</td>
-                                        <td>{item.dateOfBirth}</td>
-                                        <td>{item.street}</td>
-                                        <td>{item.city}</td>
-                                        <td>{item.state}</td>
-                                        <td>{item.zipCode}</td>
-                                    </tr>
-                                )
-                            }) : 'la liste est vide' 
+                            newdataEmployees.length ? newdataEmployees[props.pageIndex].map((item, index) => {
+                                return forEmployee(item, index)
+                            }) : <p className='p-empty-list'>la liste est vide</p>
                         }
                     </tbody>
                 </table>
             </div>
             <div className='div-pagination'>
                 <Pagination 
-                    pageIndex={props.dataEmployees.pageIndex} 
-                    users={props.dataEmployees.users} 
-                    filteredusers={props.dataEmployees.filteredusers} 
+                    pageIndex={props.pageIndex} 
+                    users={props.dataEmployees} 
+                    filteredusers={props.dataEmployeeFiltered} 
                     updatePage={props.updatePage} 
                     stateValuePageSelect={stateValuePage}
+                    cssThemes={props.cssThemes}
                 />
             </div>
         </div>

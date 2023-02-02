@@ -14,6 +14,7 @@ import SelectInput from './FormInputs/SelectInput';
 import modal from './Modal';
 import ModalSuccess from './ModalSuccess';
 import EmployeeList from './EmployeeList';
+import Table from 'chahouat-table-component';
 
 function FormSignin() {  
 
@@ -65,15 +66,25 @@ function FormSignin() {
         dispatch(setFilteredEmployees(data))
     }
 
+    //array with the values (th) of table employees list
+    const arrayValuesTh = ["First Name", 
+                           "Last Name", 
+                           "Start Date", 
+                           "Departement", 
+                           "Date of Birth", 
+                           "Street", 
+                           "City", 
+                           "State", 
+                           "Zip Code"]; 
+
     return (
         <>
         {start == false ? 
             <div className='container-fluid bg-primary'>
-                <p onClick={() => startGo()} role='button' className='p-view text-center text-light p-3'>View Current Employees</p>
-            <br/>
+                <p onClick={() => startGo()} role='button' className='p-view text-center text-light p-3 '>View Current Employees</p>
             <div className="card mx-auto" style={{maxWidth:'620px'}} >
                 <article className="card-body">
-                    <header className="mb-4"><h4 className="card-title text-center">Create Employee</h4></header>
+                    <header className="mb-4"><h4 className="card-title text-center text-primary">Create Employee</h4></header>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-row">
                             <InputText register={register} error={errors.firstname} label={'First Name'} name={"firstname"} type={"text"} />
@@ -90,7 +101,6 @@ function FormSignin() {
                                     value={DateBirth}
                                     dateFormat={"dd/MM/yyyy"}
                                     showYearDropdown
-                                    //yearDropdownItemNumber={20}
                                    //{...register("dateOfBirth")}
                                 />
                                 <small className="text-danger">
@@ -105,7 +115,6 @@ function FormSignin() {
                                     name="dateOfStart"
                                     selected={startDate}
                                     showYearDropdown
-                                    //yearDropdownItemNumber={20}
                                     onChange={(date) => setStartDate(Date.parse(date))}
                                     //{...register("dateOfStart")}
                                     innerRef={register}
@@ -117,7 +126,7 @@ function FormSignin() {
                         </div>
                         <div className='card mx-auto'>
                             <div className='card-body bg-light'>
-                                <header className="mb-4"><h5 className="card-title text-center">Address</h5></header>
+                                <header className="mb-4"><h5 className="card-title text-center text-primary">Address</h5></header>
                                 <div className="form-row">	 
                                     <InputText register={register} error={errors.street} label={'Street'} name={"street"} type={"text"} />
                                     <InputText register={register} error={errors.city} label={'City'} name={"city"} type={"text"} />
@@ -137,17 +146,24 @@ function FormSignin() {
                     </form>
                 </article>
             </div>
-            { isInfoShowed && <ModalSuccess hide={ toggleInfo }/> }
-        </div> : <EmployeeList 
-                    updatePage={updatePagePagination} 
-                    dataEmployees={dataEmployees} 
-                    dataEmployeesFiltered={dataFiltered}
-                    valueSelect1={5} 
-                    valueSelect2={10} 
-                    valueSelect3={15} 
-                    changePage={startGo} 
-                />
+        </div> : <div className='table-container'>
+                    <Table 
+                        arrayValuesTh={arrayValuesTh}
+                        updatePage={updatePagePagination} 
+                        dataEmployees={dataEmployees.users}
+                        dataEmployeeFiltered={dataEmployees.filteredusers} 
+                        pageIndex={dataEmployees.pageIndex}
+                        setDataEmployeesFiltered={dataFiltered}
+                        valueSelect1={5} 
+                        valueSelect2={10} 
+                        valueSelect3={15} 
+                        changePage={startGo} 
+                        pBack={'Go To Home'}
+                        cssThemes={'theme1'}
+                    />
+                </div>
             }
+            { isInfoShowed && <ModalSuccess hide={ toggleInfo }/> }
         </>
     );
 }

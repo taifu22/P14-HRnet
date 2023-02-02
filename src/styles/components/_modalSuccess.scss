@@ -1,15 +1,15 @@
-.modal {
+.modals {
   opacity: 1;
   position: absolute;
   top: 0; 
-  right: 0; 
+  right: 0;  
   left: 0;
   height: 125vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(39, 34, 34, 0.7);
-  .modal-content {
+  .modals-content {
     border-radius: 4px;
     position: relative;
     margin-top: -250px;
@@ -18,7 +18,7 @@
     background: white;
     padding: 1.5em 2em;
     display: flex;
-    .modal-close {
+    .modals-close {
       position: absolute;
       display: flex;
       justify-content: center;

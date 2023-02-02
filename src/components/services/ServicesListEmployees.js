@@ -4,7 +4,7 @@ export const returnProductsArrays = (items, number) => {
     let TwoDimensionalArray = []
     let remainder = items.length % parseInt(number)
     let i = 0
-    while (i < (items.length - remainder)) {
+    while (i < (items.length - remainder)) { 
       let array = items.slice(i, i + parseInt(number))
       TwoDimensionalArray.push(array)
       i += parseInt(number) 

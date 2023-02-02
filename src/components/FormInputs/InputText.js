@@ -7,7 +7,7 @@ function InputText(props) {
             <label>{props.label}</label>
             <input {...props.register(props.name)} type={props.type} name={props.name} className="form-control"  />
             <small className="text-danger">
-                {props.error?.message}	
+                {props.error?.message}	 
             </small>
         </div>
     );

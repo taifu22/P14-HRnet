@@ -1,6 +1,7 @@
 @import './components/erreur404';
 @import './components/formSignin';
 @import './components/employeeList';
+@import './components/pagination';
 @import './components/modalSuccess';
 @import './components//header';
 
@@ -10,11 +11,11 @@ html, body {
 }
 
 body {
-    background-color: #f8f9fa; 
-    font-family: Verdana, sans-serif; 
+    font-family: Verdana, sans-serif;  
     font-size: 100%;
 } 
 
 .App {
-    min-height:90vh
+    min-height:100vh;
+    background-color: #007bff;
 }
