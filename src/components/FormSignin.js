@@ -93,6 +93,7 @@ function FormSignin() {
                             <div className="form-group col-md-6" >
                                 <label>Date of birth</label>
                                 <DatePicker 
+                                    for={'dateofBirth'}
                                     selected={DateBirth}
                                     name={"dateOfBirth"}
                                     onChange={(date) => {setDateBirth(Date.parse(date))}}
@@ -109,6 +110,7 @@ function FormSignin() {
                             <div className="form-group col-md-6" >
                                 <label>Start Date</label>
                                 <DatePicker 
+                                    for={'dateofStart'}
                                     className="form-control"
                                     dateFormat="dd-MM-yyyy"
                                     name="dateOfStart"
