@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Erreur_404 from './components/Erreur_404';
 import './styles/style.scss';
 import FormSignin from './components/FormSignin';
-import EmployeeList from './components/EmployeeList';
 import Header from './components/Header';
 
 function App() {
@@ -12,7 +11,6 @@ function App() {
         <Header />
         <Routes>  
           <Route path={'/'} exact element={<FormSignin />}/>
-          <Route path={'/employeeList'} exact element={<EmployeeList />}/>
           <Route path={'*'} element={<Erreur_404 />}/>  
         </Routes>
       </BrowserRouter>  

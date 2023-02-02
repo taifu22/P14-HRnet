@@ -7,7 +7,7 @@ export const validationSchema = Yup.object().shape({
         .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
         .min(1, "trop petit!")
         .max(50, "trop long!"),
-    lastname: Yup.string()
+    lastname: Yup.string() 
         .required("le nom est obligatoire")
         .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
         .min(1, "trop petit!")
