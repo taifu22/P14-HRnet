@@ -14,7 +14,7 @@ export const validationSchema = Yup.object().shape({
         .max(50, "trop long!"),
     //dateOfBirth: Yup.string()
     //    .required("Please enter your date of birth"),
-    // dateOfStart: Yup.date()
+    //dateOfStart: Yup.date()
     //     .required("Please enter your date of start"), 
     street: Yup.string()
         .required("la rue est obligatoire") 

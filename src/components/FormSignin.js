@@ -13,7 +13,7 @@ import { departement } from '../data/departement.selectInput';
 import SelectInput from './FormInputs/SelectInput';
 import modal from './Modal';
 import ModalSuccess from './ModalSuccess';
-import Table from 'chahouat-table-component';
+import Table from 'chahouat-table-component'; 
 
 function FormSignin() {  
 
@@ -83,7 +83,7 @@ function FormSignin() {
                 <p onClick={() => startGo()} role='button' className='p-view text-center text-light p-3 '>View Current Employees</p>
             <div className="card mx-auto" style={{maxWidth:'620px'}} >
                 <article className="card-body">
-                    <header className="mb-4"><h4 className="card-title text-center text-primary">Create Employee</h4></header>
+                    <header className="mb-4"><p className="card-title text-center text-primary">Create Employee</p></header>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-row">
                             <InputText register={register} error={errors.firstname} label={'First Name'} name={"firstname"} type={"text"} />
@@ -117,8 +117,8 @@ function FormSignin() {
                                     selected={startDate}
                                     showYearDropdown
                                     onChange={(date) => setStartDate(Date.parse(date))}
+                                    //placeholderText={"choisir une date de début"}
                                     //{...register("dateOfStart")}
-                                    innerRef={register}
                                 />
                                 <small className="text-danger">
                                     {errors.dateOfStart?.message}
@@ -127,7 +127,7 @@ function FormSignin() {
                         </div>
                         <div className='card mx-auto'>
                             <div className='card-body bg-light'>
-                                <header className="mb-4"><h5 className="card-title text-center text-primary">Address</h5></header>
+                                <header className="mb-4"><p className="card-title text-center fs-3 text-primary">Address</p></header>
                                 <div className="form-row">	 
                                     <InputText register={register} error={errors.street} label={'Street'} name={"street"} type={"text"} />
                                     <InputText register={register} error={errors.city} label={'City'} name={"city"} type={"text"} />
