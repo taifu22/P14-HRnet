@@ -68,13 +68,13 @@ function FormSignin() {
     //array with the values (th) of table employees list
     const arrayValuesTh = ["First Name", 
                            "Last Name", 
-                           "Start Date", 
-                           "Departement", 
-                           "Date of Birth", 
                            "Street", 
                            "City", 
                            "State", 
-                           "Zip Code"]; 
+                           "Zip Code", 
+                           "Departement", 
+                           "Date of Birth", 
+                           "Date of Start"]; 
 
     return (
         <>
