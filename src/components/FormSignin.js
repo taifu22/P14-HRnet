@@ -101,6 +101,7 @@ function FormSignin() {
                                     value={DateBirth}
                                     dateFormat={"dd/MM/yyyy"}
                                     showYearDropdown
+                                    maxDate={DateBirth}
                                    //{...register("dateOfBirth")}
                                 />
                                 <small className="text-danger">
@@ -117,8 +118,6 @@ function FormSignin() {
                                     selected={startDate}
                                     showYearDropdown
                                     onChange={(date) => setStartDate(Date.parse(date))}
-                                    //placeholderText={"choisir une date de début"}
-                                    //{...register("dateOfStart")}
                                 />
                                 <small className="text-danger">
                                     {errors.dateOfStart?.message}

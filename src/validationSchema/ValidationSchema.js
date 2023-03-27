@@ -5,12 +5,12 @@ export const validationSchema = Yup.object().shape({
     firstname: Yup.string()
         .required("le prenom est obligatoire")
         .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
-        .min(1, "trop petit!")
+        .min(2, "trop petit!")
         .max(50, "trop long!"),
     lastname: Yup.string() 
         .required("le nom est obligatoire")
         .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
-        .min(1, "trop petit!")
+        .min(2, "trop petit!")
         .max(50, "trop long!"),
     //dateOfBirth: Yup.string()
     //    .required("Please enter your date of birth"),
@@ -18,11 +18,11 @@ export const validationSchema = Yup.object().shape({
     //     .required("Please enter your date of start"), 
     street: Yup.string()
         .required("la rue est obligatoire") 
-        .min(1, "trop petit!")
+        .min(2, "trop petit!")
         .max(50, "trop long!"),
     city: Yup.string()
         .required("la ville est obligatoire")
-        .min(1, "trop petit!")
+        .min(2, "trop petit!")
         .max(50, "trop long!"),
     zipCode: Yup.string()
         .required("le zip code est obligatoire")
